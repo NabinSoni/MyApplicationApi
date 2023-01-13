@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="jquery/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var ulAuthors = $("#ulAuthors");
+
+            $("#btnGetAuthors").click(function () {
+                $.ajax({
+                    type: "GET",
+                    url: "api/authors",
+                    dataType: "json",
+                    success: function (data) {
+                        ulAuthors.empty();
+                        $.each(data, function (index, val) {
+                            ulAuthors.append("<li> Id :- " + val.authorId + ", Name :- " + val.name + ", Age :- " + val.age + " </li>");
+                        })
+                    }
+                })
+            });
+
+            $("#btnClear").click(function () {
+                ulAuthors.empty();
+            });
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <input type="button" id="btnGetAuthors" value="Get Authors"/>
+        <input type="button" id="btnClear" value="Clear"/>
+
+        <ul id="ulAuthors">
+
+        </ul>
+    </div>
+</body>
+</html>
